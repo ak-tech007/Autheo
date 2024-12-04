@@ -96,6 +96,11 @@ var (
 	_ servertypes.Application = (*App)(nil)
 )
 
+var MyCustomProposalHandler = govclient.NewProposalHandler(
+	mycustommodulecli.NewSubmitProposalCmd, // CLI command for submitting the proposal
+	mycustommoduletypes.MyCustomProposal{}, // Proposal type definition
+)
+
 // App extends an ABCI application, but with most of its parameters exported.
 // They are exported for convenience in creating helper functions, as object
 // capabilities aren't needed for testing.
@@ -165,6 +170,7 @@ func getGovProposalHandlers() []govclient.ProposalHandler {
 	govProposalHandlers = append(govProposalHandlers,
 		paramsclient.ProposalHandler,
 		// this line is used by starport scaffolding # stargate/app/govProposalHandler
+		MyCustomProposalHandler,
 	)
 
 	return govProposalHandlers
