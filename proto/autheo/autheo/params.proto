@@ -1,0 +1,15 @@
+syntax = "proto3";
+package autheo.autheo;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "Autheo/x/autheo/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "autheo/x/autheo/Params";
+  option (gogoproto.equal) = true;
+
+  
+}
