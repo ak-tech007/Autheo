@@ -74,9 +74,11 @@ import (
 	ibcfeekeeper "github.com/cosmos/ibc-go/v8/modules/apps/29-fee/keeper"
 	ibctransferkeeper "github.com/cosmos/ibc-go/v8/modules/apps/transfer/keeper"
 	ibckeeper "github.com/cosmos/ibc-go/v8/modules/core/keeper"
+	"github.com/spf13/cobra"
 
 	autheomodulekeeper "Autheo/x/autheo/keeper"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
+	"Autheo/x/mycustommodulecli"
 
 	"Autheo/docs"
 )
@@ -97,8 +99,9 @@ var (
 )
 
 var MyCustomProposalHandler = govclient.NewProposalHandler(
-	mycustommodulecli.NewSubmitProposalCmd, // CLI command for submitting the proposal
-	mycustommoduletypes.MyCustomProposal{}, // Proposal type definition
+	func() *cobra.Command {
+		return mycustommodulecli.NewSubmitProposalCmd()
+	},
 )
 
 // App extends an ABCI application, but with most of its parameters exported.
